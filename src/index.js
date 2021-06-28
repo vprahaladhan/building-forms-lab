@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { logger } from 'redux-logger';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+
 import App from './App';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import manageBand from './reducers/manageBand'
+import manageBand from './reducers/manageBand';
 
-const store = createStore(manageBand)
-
+const store = createStore(
+  manageBand,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(logger)
+);
 
 ReactDOM.render(
   <Provider store={store}>
